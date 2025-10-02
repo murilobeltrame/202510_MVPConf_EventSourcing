@@ -16,4 +16,7 @@ builder.AddProject<WebApp>("webapp")
     .WithReference(database).WaitFor(database)
     .WithReference(broker).WaitFor(broker);
 
+builder.AddProject<Generator>("generator")
+    .WithReference(database).WaitFor(database);
+
 await builder.Build().RunAsync();

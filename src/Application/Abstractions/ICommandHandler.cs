@@ -1,5 +1,5 @@
 namespace Application.Abstractions;
-public interface ICommandHandler<in TCommand> where TCommand : ICommand
+public interface ICommandHandler
 {
-    Task Handle(TCommand command);
+    Task Handle<T>(T command) where T : ICommand;
 }

@@ -12,7 +12,7 @@ builder.AddRabbitMQClient("broker");
 builder.AddServiceDefaults();
 
 builder.Services
-    .AddTransient(typeof(ICommandHandler<>), typeof(CommandHandler<>))
+    .AddTransient<ICommandHandler, CommandHandler>()
     .AddOpenApi()
     .AddMartenDb()
     .UseNpgsqlDataSource();

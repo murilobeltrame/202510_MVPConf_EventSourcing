@@ -23,37 +23,37 @@ public static class EndpointsForWrite
     }
 
     private static async Task HandleDepartures(
-        [FromServices] ICommandHandler<DepartCommand> handler,
+        [FromServices] ICommandHandler handler,
         [FromBody] DepartCommand command) => 
         await handler.Handle(command);
 
     private static async Task HandleRests(
-        [FromServices] ICommandHandler<RestCommand> handler,
+        [FromServices] ICommandHandler handler,
         [FromBody] RestCommand command) => 
         await handler.Handle(command);
 
     private static async Task HandleFeedings(
-        [FromServices] ICommandHandler<EatCommand> handler,
+        [FromServices] ICommandHandler handler,
         [FromBody] EatCommand command) => 
         await handler.Handle(command);
 
     private static async Task HandleHunts(
-        [FromServices] ICommandHandler<HuntCommand> handler,
+        [FromServices] ICommandHandler handler,
         [FromBody] HuntCommand command) => 
         await handler.Handle(command);
 
     private static async Task HandleCollections(
-        [FromServices] ICommandHandler<CollectCommand> handler,
+        [FromServices] ICommandHandler handler,
         [FromBody] CollectCommand command) => 
         await handler.Handle(command);
 
     private static async Task HandleExplorations(
-        [FromServices] ICommandHandler<ExploreCommand> handler,
+        [FromServices] ICommandHandler handler,
         [FromBody] ExploreCommand command) => 
         await handler.Handle(command);
 
     private static async Task HandleArrivals(
-        [FromServices] ICommandHandler<ArriveCommand> handler,
+        [FromServices] ICommandHandler handler,
         [FromBody] ArriveCommand command) => 
         await handler.Handle(command);
 }

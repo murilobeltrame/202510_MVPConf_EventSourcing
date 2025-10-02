@@ -18,6 +18,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\WebApp\WebApp.csproj" />
+    <ProjectReference Include="..\..\tools\Compactor\Compactor.csproj" />
+    <ProjectReference Include="..\..\tools\Generator\Generator.csproj" />
+    <ProjectReference Include="..\..\tools\Projetor\Projetor.csproj" />
   </ItemGroup>
 
 </Project>
