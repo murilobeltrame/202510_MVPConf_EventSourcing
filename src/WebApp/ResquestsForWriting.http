@@ -1,0 +1,84 @@
+@WebApp_HostAddress = http://localhost:5273
+@Animal_Name = Filomena
+
+### Just Arrived
+
+POST {{WebApp_HostAddress}}/arrivals/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "{{Animal_Name}}",
+  "speciesName": "Marten"
+}
+
+### Explored a little bit
+
+POST {{WebApp_HostAddress}}/explorations/
+Accept: application/json
+Content-Type: application/json  
+
+{
+  "name": "{{Animal_Name}}"
+}
+
+### Took a nap
+
+POST {{WebApp_HostAddress}}/rests/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "{{Animal_Name}}"
+}
+
+### Go for a hunt
+
+POST {{WebApp_HostAddress}}/hunts/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "{{Animal_Name}}",
+  "preyName": "Squirrels"
+}
+
+### Collect some food
+POST {{WebApp_HostAddress}}/foragings/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "{{Animal_Name}}",
+  "foodName": "Berries"
+}
+
+### Eat something
+POST {{WebApp_HostAddress}}/feedings/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "{{Animal_Name}}",
+  "foodName": "Berries"
+}
+
+### Eat something else
+POST {{WebApp_HostAddress}}/feedings/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "{{Animal_Name}}",
+  "foodName": "Squirrels"
+}
+
+### Left
+
+POST {{WebApp_HostAddress}}/departures/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "{{Animal_Name}}"
+}

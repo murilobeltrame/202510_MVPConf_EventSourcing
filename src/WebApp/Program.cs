@@ -23,6 +23,7 @@ app.UseHttpsRedirection();
 
 app
     .MapWriteEndpoints()
+    .MapReadEndpoints()
     .MapOpenApi();
 
 await app.RunAsync();

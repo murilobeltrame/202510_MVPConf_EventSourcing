@@ -5,18 +5,21 @@ var builder = DistributedApplication.CreateBuilder(args);
 const string databaseName = "ApplicationDb";
 var database = builder.AddAzurePostgresFlexibleServer("database-server")
     .RunAsContainer(b => b
+        .WithDataVolume()
         .WithEnvironment("POSTGRES_DB", databaseName)
         .WithPgWeb())
     .AddDatabase(databaseName);
 
-var broker = builder.AddRabbitMQ("broker")
-    .WithManagementPlugin();
-
 builder.AddProject<WebApp>("webapp")
-    .WithReference(database).WaitFor(database)
-    .WithReference(broker).WaitFor(broker);
+    .WithReference(database)
+    .WaitFor(database);
 
 builder.AddProject<Generator>("generator")
-    .WithReference(database).WaitFor(database);
+    .WithReference(database)
+    .WaitFor(database);
+
+builder.AddProject<Projetor>("projector")
+    .WithReference(database)
+    .WaitFor(database);
 
 await builder.Build().RunAsync();

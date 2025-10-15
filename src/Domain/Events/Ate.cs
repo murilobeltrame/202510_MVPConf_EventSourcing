@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 using Domain.ValueObjects;
 
 namespace Domain.Events;
@@ -7,6 +9,9 @@ public record Ate : IEvent
     public string Name { get; init; }
     public string Food { get; init; }
     public int? Quantity { get; init; }
+
+    [JsonConstructor]
+    private Ate() { }
 
     public Ate(string name, Food food, int? quantity = 1)
     {

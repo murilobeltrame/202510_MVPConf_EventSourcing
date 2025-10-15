@@ -1,4 +1,7 @@
+using Infrastructure.Projections;
+
 using JasperFx.Events;
+using JasperFx.Events.Projections;
 
 using Marten;
 
@@ -17,6 +20,10 @@ public static class ServiceProviderExtensions
             .AddMarten(o =>
             {
                 o.Events.StreamIdentity = StreamIdentity.AsString;
+                
+                o.Schema.For<AnimalSummary>().Identity(x => x.Name);
+                
+                o.Projections.Add<AnimalSummaryProjection>(ProjectionLifecycle.Async);
             });
     }
 }
