@@ -12,9 +12,11 @@ namespace Generator;
 
 public class GeneratorService(ICommandHandler handler, ILogger<GeneratorService> logger): IHostedService
 {
+    private bool _running = true;
+    
     public async Task StartAsync(CancellationToken cancellationToken)
     {
-        while (true)
+        while (_running)
         {
             // get a list of names
             var arrivalsList = new AutoFaker<ArriveCommand>()
@@ -26,10 +28,12 @@ public class GeneratorService(ICommandHandler handler, ILogger<GeneratorService>
             // in between, there can be hunts and collects , explorations and rests on random order
             foreach (var arrival in arrivalsList)
             {
-                Console.WriteLine($"Generated arrival: {arrival.Name} the {arrival.SpeciesName}");
+                logger.LogInformation("Generated arrival: {Name} the {Species}", arrival.Name, arrival.SpeciesName);
                 await handler.Handle(arrival);
                 
                 var actionCount = new Random().Next(5, 15);
+                logger.LogInformation("Action count: {ActionCount} for {Name}", actionCount, arrival.Name);
+                
                 for (int i = 0; i < actionCount; i++)
                 {
                     var actionType = new Random().Next(0, 4);
@@ -64,6 +68,8 @@ public class GeneratorService(ICommandHandler handler, ILogger<GeneratorService>
                             break;
                     }
                 }
+                
+                logger.LogInformation("Generated departure: {Name} the {Species}", arrival.Name, arrival.SpeciesName);
                 await handler.Handle(new DepartCommand(arrival.Name));
             }
 
@@ -71,5 +77,9 @@ public class GeneratorService(ICommandHandler handler, ILogger<GeneratorService>
         }
     }
 
-    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        _running = false;
+        return Task.CompletedTask;
+    } 
 }

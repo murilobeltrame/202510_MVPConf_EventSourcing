@@ -19,6 +19,11 @@ public static class ServiceProviderExtensions
             .AddTransient<IEventStore, EventStore>()
             .AddMarten(o =>
             {
+                o.Events.MetadataConfig.HeadersEnabled = true;
+                o.Events.MetadataConfig.CausationIdEnabled = true;
+                o.Events.MetadataConfig.CorrelationIdEnabled = true;
+                o.Events.MetadataConfig.UserNameEnabled = true;
+                
                 o.Events.StreamIdentity = StreamIdentity.AsString;
                 
                 o.Schema.For<AnimalSummary>().Identity(x => x.Name);

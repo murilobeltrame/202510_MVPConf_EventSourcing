@@ -8,10 +8,10 @@ using WebApp;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddAzureNpgsqlDataSource("ApplicationDb");
-builder.AddRabbitMQClient("broker");
 builder.AddServiceDefaults();
 
 builder.Services
+    .AddTransient<CorrelationIdMiddleware>()
     .AddTransient<ICommandHandler, CommandHandler>()
     .AddOpenApi()
     .AddMartenDb()
@@ -19,7 +19,9 @@ builder.Services
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
+app
+    .UseMiddleware<CorrelationIdMiddleware>()
+    .UseHttpsRedirection();
 
 app
     .MapWriteEndpoints()

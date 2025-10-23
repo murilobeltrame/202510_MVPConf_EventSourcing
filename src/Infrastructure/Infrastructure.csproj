@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Azure.Npgsql" Version="9.5.0" />
-    <PackageReference Include="Marten.AspNetCore" Version="8.11.0" />
+    <PackageReference Include="Aspire.Azure.Npgsql" Version="9.5.1" />
+    <PackageReference Include="Marten.AspNetCore" Version="8.13.1" />
   </ItemGroup>
 
   <ItemGroup>
