@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\env\ServiceDefaults\ServiceDefaults.csproj" />
     <ProjectReference Include="..\..\src\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\Projetor\Projetor.csproj" />
   </ItemGroup>
 
 </Project>

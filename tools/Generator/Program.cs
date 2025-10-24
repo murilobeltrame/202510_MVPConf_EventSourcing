@@ -17,6 +17,7 @@ builder.Services
     .AddTransient<ICommandHandler, CommandHandler>()
     .AddMartenDb()
     .UseNpgsqlDataSource();
+
 builder.Services.AddHostedService<GeneratorService>();
 
 var app = builder.Build();
