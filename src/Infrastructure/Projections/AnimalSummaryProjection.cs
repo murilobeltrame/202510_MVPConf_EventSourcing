@@ -25,16 +25,16 @@ public record AnimalSummary(
 
 public class AnimalSummaryProjection: SingleStreamProjection<AnimalSummary, string>
 {
-    public AnimalSummary Create(IEvent<Arrived> @event)
+    public static AnimalSummary Create(IEvent<Arrived> @event)
     {
       var arrived = @event.Data as Arrived;
       return new AnimalSummary(arrived.Name, arrived.Species.Name, @event.Timestamp.LocalDateTime);
     }
     
-    public AnimalSummary Apply(IEvent<Departed> @event, AnimalSummary summary) => 
+    public static AnimalSummary Apply(IEvent<Departed> @event, AnimalSummary summary) => 
         summary with { LeftAt = @event.Timestamp.LocalDateTime };
 
-    public AnimalSummary Apply(Hunted @event, AnimalSummary summary)
+    public static AnimalSummary Apply(Hunted @event, AnimalSummary summary)
     {
         var hunt = new Hunt(@event.Prey.ToString());
         if (summary.Hunts is null) return summary with { Hunts = [hunt] };
@@ -43,7 +43,7 @@ public class AnimalSummaryProjection: SingleStreamProjection<AnimalSummary, stri
         return summary with { Hunts = hunts };
     }
     
-    public AnimalSummary Apply(Collected @event, AnimalSummary summary)
+    public static AnimalSummary Apply(Collected @event, AnimalSummary summary)
     {
         var forage = new Forage(@event.Food.ToString(), @event.Quantity ?? 1);
         if (summary.Foraging is null) return summary with { Foraging = [forage] };
@@ -52,7 +52,7 @@ public class AnimalSummaryProjection: SingleStreamProjection<AnimalSummary, stri
         return summary with { Foraging = foraging };
     }
 
-    public AnimalSummary Apply(Ate @event, AnimalSummary summary)
+    public static AnimalSummary Apply(Ate @event, AnimalSummary summary)
     {
         var eat = new Eat(@event.Food, @event.Quantity ?? 1);
         if (summary.Eats is null) return summary with { Eats = [eat] };
@@ -61,7 +61,7 @@ public class AnimalSummaryProjection: SingleStreamProjection<AnimalSummary, stri
         return summary with { Eats = eats };
     }
 
-    public AnimalSummary Apply(IEvent<Explored> @event, AnimalSummary summary) => summary with{ ExplorationDuration = summary.ExplorationDuration + TimeSpan.FromHours(1) };
+    public static AnimalSummary Apply(IEvent<Explored> @event, AnimalSummary summary) => summary with{ ExplorationDuration = summary.ExplorationDuration + TimeSpan.FromHours(1) };
     
-    public AnimalSummary Apply(IEvent<Rested> @event, AnimalSummary summary) => summary with{RestingDuration = summary.RestingDuration + TimeSpan.FromHours(1) };
+    public static AnimalSummary Apply(IEvent<Rested> @event, AnimalSummary summary) => summary with{RestingDuration = summary.RestingDuration + TimeSpan.FromHours(1) };
 }

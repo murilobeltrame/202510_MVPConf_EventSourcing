@@ -5,28 +5,38 @@
 GET {{WebApp_HostAddress}}/arrivals/
 Accept: application/json
 
-### Get whenever a hunt happened
+### Get all animals that have departed
 
-GET {{WebApp_HostAddress}}/hunts/
+GET {{WebApp_HostAddress}}/departures/
 Accept: application/json
 
-### Get everithing that has happened to a specific animal
-@animalName = Harold
-GET {{WebApp_HostAddress}}/animal/{{animalName}}/actions
+### Get all animals in the crown
+
+GET {{WebApp_HostAddress}}/animals/
 Accept: application/json
 
-### Get a sumarry of animal Actions
-GET {{WebApp_HostAddress}}/animal/{{animalName}}
+### Get all animals in the crown (better way)
+
+GET {{WebApp_HostAddress}}/v2/animals/
 Accept: application/json
 
-### Get a summary of all animals
-GET {{WebApp_HostAddress}}/v2/animal/
+### Who ate mussels
+
+GET {{WebApp_HostAddress}}/meals/mussels
 Accept: application/json
 
-### Getting summary for a specific animal in v2
-GET {{WebApp_HostAddress}}/v2/animal/{{animalName}}
+### Hows our food stock
+
+GET {{WebApp_HostAddress}}/foodstock/
 Accept: application/json
 
-### Getting summary for a specific animal in v2
-GET {{WebApp_HostAddress}}/v2/animal/{{animalName}}:until?minutes=5
+### Get an animal routine
+
+@animal_name = Clifton
+GET {{WebApp_HostAddress}}/animal/{{animal_name}}
+Accept: application/json
+
+### Get an animal routine up to a date
+
+GET {{WebApp_HostAddress}}/animal/{{animal_name}}?untilDays=1
 Accept: application/json
